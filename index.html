@@ -39,10 +39,15 @@
       line-height: 1.4;
     }
     @media (max-width: 600px) {
-      .checklist-item {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+  .checklist-item {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .checklist-item label {
+    flex: 1;
+  }
+}
     }
   </style>
 </head>
