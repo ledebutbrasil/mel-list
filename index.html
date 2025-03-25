@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checklist de Materiais Odontologia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    .container {
+      max-width: 950px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h2, h3, h4 {
+      color: #005fa3;
+      margin-top: 30px;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .checklist-item input {
+      margin-right: 10px;
+      margin-top: 4px;
+    }
+    label {
+      line-height: 1.4;
+    }
+    @media (max-width: 600px) {
+      .checklist-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Checklist de Materiais Odontologia</h2>
+
+    <h3>1. Material para ser adquirido individualmente</h3>
+    <div id="lista-individual"></div>
+
+    <h3>2. Material para ser adquirido pela dupla</h3>
+    <div id="lista-dupla"></div>
+
+    <h3>3. Material complementar</h3>
+    <div id="lista-complementar"></div>
+
+    <h3>4. Materiais por Aula Prática</h3>
+    <h4>Aula Prática 1: Delineadores e PPR</h4>
+    <div id="aula1"></div>
+
+    <h4>Aula Prática 2: Nichos e Retenções</h4>
+    <div id="aula2"></div>
+
+    <h4>Materiais gerais para Endodontia</h4>
+    <div id="endo"></div>
+
+    <h4>Kit de limas modelo UFBA</h4>
+    <div id="limas"></div>
+
+    <h4>Materiais fornecidos pela faculdade</h4>
+    <div id="faculdade"></div>
+  </div>
+
+  <script>
+    function criarChecklist(lista, containerId, prefixo) {
+      const container = document.getElementById(containerId);
+      lista.forEach((item, index) => {
+        const id = `${prefixo}_${index}`;
+        const div = document.createElement("div");
+        div.className = "checklist-item";
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.id = id;
+        checkbox.checked = localStorage.getItem(id) === "true";
+        checkbox.addEventListener("change", () => {
+          localStorage.setItem(id, checkbox.checked);
+        });
+
+        const label = document.createElement("label");
+        label.htmlFor = id;
+        label.textContent = item;
+
+        div.appendChild(checkbox);
+        div.appendChild(label);
+        container.appendChild(div);
+      });
+    }
+
+    const materiaisIndividuais = [
+      "Bandeja clínica", "Campo plástico para bancada de laboratório (2 unidades)",
+      "Campo descartável para bancada clínica e proteção do paciente", "Cuba de Borracha para manipulação de gesso ou alginato",
+      "Espátula de plástico para gesso", "Espátula metálica (tipo pintor)", "Espátulas de cera nº 36, nº31 e nº7 (1 de cada)",
+      "Escova de dente para enceramento", "Estilete", "Espelho clínico", "Fósforo ou isqueiro", "Foto 3x4",
+      "Gorro", "Prendedor (jacaré)", "Instrumental para exame clínico", "Kit de Fresas e Polidores",
+      "Álcool em gel acima de 70%", "Lápis cópia e lapiseira 0.5", "Livros de procedimento",
+      "Máscaras descartáveis", "Medidor de água e pó para alginato", "Óculos de Proteção INDIVIDUAL",
+      "Pedra branca para acabamento de resina para peça reta", "Pinça Muller", "Pincel nº2",
+      "Pincel nº4", "Placa de vidro espessura média ou grossa", "Pote plástico de vidro ou silicone cores diferentes",
+      "Pote paladon", "Régua milimetrada flexível", "Sabonete líquido para uso pessoal",
+      "Seringa plástica de 20 ml sem agulha"
+    ];
+
+    const materiaisDupla = [
+      "Adesivo para dentadura", "Afastador para fotografia intrabucal em acrílico",
+      "Aquecedor de godê (verificar se precisa no primeiro dia)", "Articulador Semi-Ajustável",
+      "Caixa unificada de transporte para os moldes", "Carbono accu film ou similar (21 marcas)",
+      "Cera 7 rosa ou vermelha", "Compasso de Willis", "Espelho intrabucal para foto oclusal",
+      "Fixador para dentaduras ou pino c/ rosca", "Godê de vidro com base – Lysanda",
+      "Mesa de Camper", "Modelos perfurados para desoclusão total (HDR)",
+      "Óxido de zinco de eugenol + lysanda ou horus", "Régua de Fox",
+      "Resina acrílica auto polimerizável incolor (pó e líquido)", "Esfigmomanômetro + estetoscópio",
+      "Espelho de mão para o paciente"
+    ];
+
+    const aula1 = [
+      "01 Toalha de plástico para bancada", "01 espátula Lecron", "04 lapiseiras nº 0,7",
+      "01 caixa de grafite de diferentes cores (0,7)", "01 caixa de lápis de cor",
+      "01 Delineador Bio-Art completo com as pontas acessórias", "01 micromotor (peça reta)",
+      "02 pincéis (01 fino e 01 grosso)", "02 potes Dappen", "01 Kit de acabamento e polimento (American Burrs)",
+      "01 Lupa", "01 bolacha para articulador", "03 lâminas de cera sete", "01 lamparina com álcool",
+      "01 placa de vidro", "01 espátula de manipulação", "Resina acrílica autopolimerizável transparente",
+      "01 duralay vermelho", "Vaselina sólida", "01 isolante cel-lac", "01 conta-gotas",
+      "04 modelos de estudo", "01 régua flexível", "01 caixa (correio) para colocar os 04 modelos"
+    ];
+
+    const aula2 = [
+      "Brocas diamantadas (alta rotação) nº:1012, 1014, 3118, 3101, 3203, 4138",
+      "01 sonda exploradora", "01 espátula para aplicar resina", "01 lapiseira (nº 0,5/0,7)",
+      "01 espátula Lecron", "01 gral de borracha", "01 Espátula para gesso",
+      "01 folha de lixa d’água granulação 320", "08 dentes naturais (incisivo, canino, pré-molar, molar)"
+    ];
+
+    const endo = [
+      "02 Espelhos bucais PRIMEIRO PLANO", "02 Pinças para algodão", "02 Sondas exploradoras para Endodontia",
+      "01 Sonda exploradora nº 5", "02 Curetas dentinárias (haste longa)", "02 Seringas CARPULE",
+      "02 seringas DESCARTÁVEIS 5 ml", "01 Cuba metálica", "02 Potes Dappen",
+      "Brocas esféricas e diamantadas diversas (alta e baixa rotação)",
+      "Espátulas de manipulação flexível e inserção", "02 Placas de vidro com uma face despolida",
+      "05 colgaduras individuais", "02 Réguas milimetradas endodontia de metal", "02 Pinças de Palmerr",
+      "01 Cabo Bisturi", "01 Seringa rosqueável ML", "01 perfurador",
+      "01 Arco Plástico Osby", "Grampos diversos (KSK ou Ivory)", "Lamina de bisturi 15",
+      "Pontas de Irrigação (ULTRADENT, ANGELUS, BD ou MK Life)", "Kit de Pontas para aspiração",
+      "Calcadores de Paiva para canal", "01 Tamborel", "Turbina / micro motor",
+      "Corrente para guardanapo", "Cones de papel 1ª e 2ª série", "Super bond",
+      "Bandeja inox", "Cartela para RX com 5 furos", "Cones de guta percha principais e secundários",
+      "Dique/ lençol de borracha", "Endo fill ou Fill Canal", "01 caixa de Filme radiográfico",
+      "Fósforos ou isqueiro", "Fita crepe", "Campo de TNT", "Papel filme",
+      "Manequim para Endodontia", "28 dentes naturais ou artificiais com polpa",
+      "Cêra rosa 7 ou utilidade", "Acrílico transparente (pó e líquido)"
+    ];
+
+    const limas = [
+      "Lima Tipo K 90-140 31 mm", "Lima tipo K 08 25 mm", "Lima tipo K 10 25 mm",
+      "Lima tipo K flexofile 15-40 (25 mm e 31 mm)", "Lima tipo K 45-80 (25 mm e 31 mm)",
+      "Lima tipo H 15-40 31 mm", "Lima tipo H 45-80 31 mm", "Espaçador digital A-D 25 mm",
+      "Broca Gates 1 e 2 28 mm", "Lima Protaper manual ou Easy manual NiTi"
+    ];
+
+    const faculdade = [
+      "Revelador", "Fixador", "Álcool", "Gase", "Algodão",
+      "Papel toalha", "Hipoclorito de sódio 1% e 2,5%"
+    ];
+
+    criarChecklist(materiaisIndividuais, "lista-individual", "indiv");
+    criarChecklist(materiaisDupla, "lista-dupla", "dupla");
+    criarChecklist(aula1, "aula1", "aula1");
+    criarChecklist(aula2, "aula2", "aula2");
+    criarChecklist(endo, "endo", "endo");
+    criarChecklist(limas, "limas", "limas");
+    criarChecklist(faculdade, "faculdade", "facul");
+  </script>
+</body>
+</html>
