@@ -48,10 +48,20 @@
     flex: 1;
   }
 }
-    }
   </style>
 </head>
 <body>
+  <header style="background-color: #005fa3; color: white; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 20px;">
+  <h1 style="margin: 0; font-size: 24px;">Checklist por Matéria - Odontologia UFBA</h1>
+  <p style="margin: 5px 0 0; font-size: 14px;">Organize seu material por disciplina, de forma prática e visual.</p>
+  <nav style="margin-top: 10px;">
+    <a href="#endo" style="color: white; margin: 0 10px; text-decoration: underline;">Endodontia</a>
+    <a href="#fof023" style="color: white; margin: 0 10px; text-decoration: underline;">PPR I</a>
+    <a href="#fixa" style="color: white; margin: 0 10px; text-decoration: underline;">Prótese Fixa II</a>
+    <a href="#total" style="color: white; margin: 0 10px; text-decoration: underline;">Prótese Total</a>
+    <a href="#perio" style="color: white; margin: 0 10px; text-decoration: underline;">Periodontia</a>
+  </nav>
+</header>
   <div class="container">
     <div style="text-align: center; margin-bottom: 20px;">
       <style>
@@ -76,30 +86,32 @@
     </div>
     <h2>Checklist de Materiais Odontologia</h2>
 
-    <h3>1. Material para ser adquirido individualmente</h3>
-    <div id="lista-individual"></div>
+    <h3 id="endo" style="border-left: 5px solid #0077cc; padding-left: 10px;">🦷 1. Endodontia (FOF167 / FOF162)</h3>
+<h4>Materiais Individuais</h4>
+<div id="endo-lista"></div>
 
-    <h3>2. Material para ser adquirido pela dupla</h3>
-    <div id="lista-dupla"></div>
+<h4>Kit de limas modelo UFBA</h4>
+<div id="limas"></div>
 
-    <h3>3. Material complementar</h3>
-    <div id="lista-complementar"></div>
+<h4>Materiais fornecidos pela faculdade</h4>
+<div id="faculdade"></div>
 
-    <h3>4. Materiais por Aula Prática</h3>
-    <h4>Aula Prática 1: Delineadores e PPR</h4>
-    <div id="aula1"></div>
+<h3 id="fof023" style="border-left: 5px solid #28a745; padding-left: 10px;">🧵 2. Prótese Parcial Removível I (FOF023)</h3>
+<h4>Aula Prática 1: Delineadores e PPR</h4>
+<div id="aula1"></div>
 
-    <h4>Aula Prática 2: Nichos e Retenções</h4>
-    <div id="aula2"></div>
+<h4>Aula Prática 2: Nichos e Retenções</h4>
+<div id="aula2"></div>
 
-    <h4>Materiais gerais para Endodontia</h4>
-    <div id="endo"></div>
+<h3 id="fixa" style="border-left: 5px solid #ffc107; padding-left: 10px;">🛠️ 3. Prótese Fixa II</h3>
+<div id="lista-complementar"></div>
 
-    <h4>Kit de limas modelo UFBA</h4>
-    <div id="limas"></div>
+<h3 id="total" style="border-left: 5px solid #6610f2; padding-left: 10px;">🧩 4. Prótese Total</h3>
+<div id="lista-individual"></div>
+<div id="lista-dupla"></div>
 
-    <h4>Materiais fornecidos pela faculdade</h4>
-    <div id="faculdade"></div>
+<h3 id="perio" style="border-left: 5px solid #e83e8c; padding-left: 10px;">🩺 5. Periodontia I (FOF164)</h3>
+<div id="periodontia"></div>
   </div>
 
   <script>
@@ -248,7 +260,31 @@
   "01 cx lima Protaper manual ou Easy manual NiTi",
   "Aguardar orientação das professoras para comprar as limas protaper manual ou easy"
 ];
-    const faculdade = [
+    const periodontia = [
+  "EPI completo (máscara, gorro, luvas, face shield)",
+  "Manequim para atividade pré-clínica (MOM, Pronew ou similar)",
+  "Jogo clínico: espelho bucal, pinça clínica, sonda exploradora, espátula de inserção",
+  "Seringa carpule",
+  "Sonda periodontal (Williams ou Carolina do Norte)",
+  "Sonda OMS",
+  "Sonda de Nabers",
+  "Jogo de curetas de Gracey (3-4; 5-6; 7-8; 11-12; 13-14 e 5-6 MF)",
+  "Foice 0/0 (ponta Morse)",
+  "Bandeja inox pequena",
+  "Pedra de carborundum (granulação média - laranja)",
+  "Seringa de 20mL para irrigação com agulha 30x8mm OU seringa Luer-Lock de vidro",
+  "Micromotor, contra-ângulo e turbina de alta rotação",
+  "02 Potes Dappen",
+  "02 Escovas de Robson",
+  "02 Taças de borracha macia para profilaxia",
+  "02 Pontas de borracha macia para profilaxia (em forma de chama)",
+  "01 Escova Intertufo",
+  "Pinça para carbono de Miller",
+  "Afastadores de acrílico fotográficos (duas peças) e expandex",
+  "Caixas inox perfuradas para esterilização"
+];
+
+const faculdade = [
   "Revelador", "Fixador", "Álcool", "Gase", "Algodão",
   "Papel toalha", "Hipoclorito de sódio 1% e 2,5% USO NA ENDO CLÍNICA",
   "A DISCIPLINA IRÁ VERIFICAR SE TEM NA FOUFBA, CASO NÃO TENHA O ALUNO DEVERÁ COMPRAR"
@@ -256,12 +292,14 @@
 
     criarChecklist(materiaisIndividuais, "lista-individual", "indiv");
     criarChecklist(materiaisDupla, "lista-dupla", "dupla");
+    // já incluído anteriormente
     criarChecklist(materiaisComplementares, "lista-complementar", "comple");
     criarChecklist(aula1, "aula1", "aula1");
     criarChecklist(aula2, "aula2", "aula2");
-    criarChecklist(endo, "endo", "endo");
+    criarChecklist(endo, "endo-lista", "endo");
     criarChecklist(limas, "limas", "limas");
     criarChecklist(faculdade, "faculdade", "facul");
+    criarChecklist(periodontia, "periodontia", "perio");
   </script>
 </body>
 </html>
